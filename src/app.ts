@@ -7,4 +7,5 @@ const app = new Application();
 //   const item: Item = await ctx.request.body().value;
 //   console.log(item);
 // });
-// await app.listen({ port: 8000 });
+
+await app.listen({ port: 8000 });

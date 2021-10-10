@@ -6,4 +6,5 @@ export {
   Context,
   Router,
 } from "https://deno.land/x/oak@v9.0.1/mod.ts";
+export type { RouterContext } from "https://deno.land/x/oak@v9.0.1/mod.ts";
 export { Client as PostgresClient } from "https://deno.land/x/postgres@v0.13.0/mod.ts";
