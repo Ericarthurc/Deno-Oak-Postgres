@@ -1,6 +1,6 @@
+import { PostgresClient } from "../../deps.ts";
 import { IItem } from "../types.ts";
 import { dbClient } from "../db.ts";
-import { PostgresClient } from "../../deps.ts";
 
 class ItemModel {
   private dbClient: PostgresClient;

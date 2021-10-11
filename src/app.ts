@@ -1,11 +1,8 @@
 import { Application } from "../deps.ts";
+import itemRouter from "./routes/item.routes.ts";
 
 const app = new Application();
 
-// app.use(async (ctx) => {
-//   // ctx.response.body = "Hello world!";
-//   const item: Item = await ctx.request.body().value;
-//   console.log(item);
-// });
+app.use(itemRouter.routes()).use(itemRouter.allowedMethods());
 
 await app.listen({ port: 8000 });
