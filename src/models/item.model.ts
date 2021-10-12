@@ -1,6 +1,6 @@
-import { PostgresClient } from "../../deps.ts";
-import { IItem } from "../types.ts";
-import { dbClient } from "../db.ts";
+import { PostgresClient } from '../../deps.ts';
+import { IItem } from '../types.ts';
+import { dbClient } from '../db/db.ts';
 
 class ItemModel {
   private dbClient: PostgresClient;
@@ -9,11 +9,11 @@ class ItemModel {
     this.dbClient = dbClient;
   }
 
-  async insert(data: Omit<IItem, "id">): Promise<Partial<IItem>> {
+  async insert(data: IItem): Promise<Partial<IItem>> {
     try {
       await this.dbClient.connect();
       const text =
-        "insert into items (product, serial, condition, year) values ($1, $2, $3, $4) returning id";
+        'insert into items (product, serial, condition, year) values ($1, $2, $3, $4) returning id';
       const result = await this.dbClient.queryObject<IItem>({
         text,
         args: [data.product, data.serial, data.condition, data.year],
@@ -29,7 +29,7 @@ class ItemModel {
   async delete(id: string): Promise<boolean> {
     try {
       await this.dbClient.connect();
-      const text = "delete from items where id = $1";
+      const text = 'delete from items where id = $1';
       await this.dbClient.queryObject<IItem>({
         text,
         args: [id],
