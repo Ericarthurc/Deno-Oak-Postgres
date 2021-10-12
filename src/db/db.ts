@@ -10,9 +10,7 @@ export const dbConfig = {
   password: Deno.env.get('DB_PASSWORD'),
 };
 
-// const data = await Deno.readTextFile("./database.sql");
-// await client.queryArray(
-//   `${data}`,
-// );
-
 export const dbClient = new PostgresClient(dbConfig);
+
+const data = await Deno.readTextFile('./database.sql');
+await dbClient.queryArray(`${data}`);
