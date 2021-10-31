@@ -1,6 +1,6 @@
-import { RouterContext } from '../../deps.ts';
-import { IItem } from '../types.ts';
-import { Item } from '../models/item.model.ts';
+import { RouterContext } from "../../deps.ts";
+import { IItem } from "../types.ts";
+import { Item } from "../models/item.model.ts";
 
 export async function getItems(ctx: RouterContext) {}
 
