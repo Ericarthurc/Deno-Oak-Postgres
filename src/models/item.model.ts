@@ -19,6 +19,8 @@ class ItemModel {
   }
 
   async insert(data: IItem): Promise<Partial<IItem>> {
+    console.log(data);
+
     try {
       await this.dbClient.connect();
       const text =
@@ -83,16 +85,24 @@ class ItemModel {
     }
   }
 
-  // async findOneById(id: string): Promise<Partial<IItem>> {
-  //   try {
-  //     await this.dbClient.connect();
-  //     const text = "SELECT * FROM items WHERE id = $1";
-  //     const result = await this.dbClient.queryObject<IItem>({
-  //       text,
-  //       args: [id],
-  //     });
-  //   } catch (error) {}
-  // }
+  async findOneById(id: string): Promise<Partial<IItem>> {
+    try {
+      await this.dbClient.connect();
+      const text = "SELECT * FROM items WHERE id = $1";
+      const result = await this.dbClient.queryObject<IItem>({
+        text,
+        args: [id],
+      });
+
+      if (result.rows.length == 0) {
+        throw new Error("empty");
+      }
+
+      return result.rows[0] as IItem;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export const Item = new ItemModel(dbClient);
